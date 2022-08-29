@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+
 
 // Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function () {
 //     Route::get('/dashboard', [DasboardController::class, 'index'])->name('dashboard.admin')->middleware('is_admin');
@@ -24,12 +24,7 @@ Route::prefix('admin')->middleware('auth', 'is_admin')->group(function () {
 });
 
 // Route user admin
-Route::prefix('user')->middleware('auth')->group(function () {
+Route::prefix('user')->middleware('auth', 'is_admin')->group(function () {
     // Halaman Dashboard User
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard.user');
 });
-
-// Route::group(['prefix' => 'user',  'middleware' => 'auth'], function () {
-
-//     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard.user');
-// });
